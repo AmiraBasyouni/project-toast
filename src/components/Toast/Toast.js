@@ -19,16 +19,16 @@ const ICONS_BY_VARIANT = {
 };
 
 function Toast({ children, variant, setPopToast }) {
-  let VariantTag = '';
+  let Icon = '';
   if (ICONS_BY_VARIANT[variant] === undefined) {
     throw new Error('Toast: ICONS_VARIANT does not contain variant');
   } else {
-    VariantTag = ICONS_BY_VARIANT[variant];
+    Icon = ICONS_BY_VARIANT[variant];
   }
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
-        <VariantTag size={24} />
+        <Icon size={24} />
       </div>
       <p className={styles.content}>{children}</p>
       <button className={styles.closeButton} onClick={() => setPopToast(false)}>
