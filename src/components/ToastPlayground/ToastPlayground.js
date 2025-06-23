@@ -37,16 +37,13 @@ function ToastPlayground() {
 
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
-
-          {VARIANT_OPTIONS.map((variantType, index) => {
-            return (
-              <div
-                key={index}
-                className={`${styles.inputWrapper} ${styles.radioWrapper}`}
-              >
-                <label htmlFor={`variant-${variantType}`}>
+          <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
+            {VARIANT_OPTIONS.map((variantType, index) => {
+              const radioLabel = `variant-${variantType}`;
+              return (
+                <label key={index} htmlFor={radioLabel}>
                   <input
-                    id={`variant-${variantType}`}
+                    id={radioLabel}
                     type="radio"
                     name="variant"
                     value={variantType}
@@ -55,9 +52,9 @@ function ToastPlayground() {
                   />
                   {variantType}
                 </label>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <div className={styles.row}>
