@@ -1,4 +1,5 @@
 import React from 'react';
+import useEscape from '../../hooks/use-escape';
 
 export const ToastContext = React.createContext();
 
@@ -18,7 +19,7 @@ function ToastProvider({ children }) {
     [stack]
   );
 
-  const removeToast = React.useCallback(
+  const dismissToast = React.useCallback(
     (index) => {
       const nextStack = [...stack];
       nextStack.splice(index, 1);
@@ -27,9 +28,16 @@ function ToastProvider({ children }) {
     [stack]
   );
 
+  const clearToasts = React.useCallback((index) => {
+    setStack([]);
+  }, []);
+
+  // clear toasts on escape
+  useEscape(clearToasts);
+
   const value = React.useMemo(() => {
-    return { stack, createToast, removeToast };
-  }, [stack, createToast, removeToast]);
+    return { stack, createToast, dismissToast, clearToasts };
+  }, [stack, createToast, dismissToast, clearToasts]);
 
   return (
     <ToastContext.Provider value={value}>{children}</ToastContext.Provider>

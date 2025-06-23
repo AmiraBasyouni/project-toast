@@ -22,7 +22,7 @@ const ICONS_BY_VARIANT = {
 // Toast Renderer
 function Toast({ children, variant, index }) {
   const Tag = ICONS_BY_VARIANT[variant];
-  const { removeToast } = React.useContext(ToastContext);
+  const { dismissToast } = React.useContext(ToastContext);
 
   if (Tag === undefined) {
     throw new Error('Toast Component: variant is undefined');
@@ -31,12 +31,21 @@ function Toast({ children, variant, index }) {
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
+        {/*Variant SVG icon*/}
         <Tag size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
-      <button className={styles.closeButton} onClick={() => removeToast(index)}>
+      <p className={styles.content}>
+        <VisuallyHidden>`${variant} - `</VisuallyHidden>
+        {children}
+      </p>
+      <button
+        className={styles.closeButton}
+        aria-label="Dismiss message"
+        aria-live="off"
+        onClick={() => dismissToast(index)}
+      >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
+        {/*<VisuallyHidden>Dismiss message</VisuallyHidden>*/}
       </button>
     </div>
   );
