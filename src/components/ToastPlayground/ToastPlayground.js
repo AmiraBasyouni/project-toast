@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import Button from "../Button";
+import Button from '../Button';
 
-import Toast from "../Toast";
+import Toast from '../Toast';
 
-import styles from "./ToastPlayground.module.css";
+import styles from './ToastPlayground.module.css';
 
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
+const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [popToast, setPopToast] = React.useState(false);
   return (
@@ -30,7 +30,7 @@ function ToastPlayground() {
           <label
             htmlFor="message"
             className={styles.label}
-            style={{ alignSelf: "baseline" }}
+            style={{ alignSelf: 'baseline' }}
           >
             Message
           </label>
