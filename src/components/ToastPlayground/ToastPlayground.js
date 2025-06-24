@@ -15,11 +15,16 @@ function ToastPlayground() {
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    const nextToastStack = [...toastStack];
-    nextToastStack.push({ id: Math.random(), variant, message });
-    setToastStack(nextToastStack);
+    createToast({ id: Math.random(), variant, message });
 
     setVariant(VARIANT_OPTIONS[0]);
+    setMessage('');
+  }
+
+  function createToast(toast) {
+    const nextToastStack = [...toastStack];
+    nextToastStack.push(toast);
+    setToastStack(nextToastStack);
   }
 
   function handleDismiss(index) {
