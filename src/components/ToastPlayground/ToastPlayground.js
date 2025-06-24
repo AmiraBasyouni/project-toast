@@ -16,8 +16,7 @@ function ToastPlayground() {
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    const toast = { id: Math.random(), variant, message };
-    createToast(toast);
+    createToast(variant, message);
 
     setVariant(VARIANT_OPTIONS[0]);
     setMessage('');
