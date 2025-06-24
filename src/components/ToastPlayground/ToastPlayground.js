@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '../Button';
 
+import { ToastContext } from '../ToastProvider';
 import ToastShelf from '../ToastShelf';
 
 import styles from './ToastPlayground.module.css';
@@ -11,26 +12,15 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const [toastStack, setToastStack] = React.useState([]);
+  const { createToast } = React.useContext(ToastContext);
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    createToast({ id: Math.random(), variant, message });
+    const toast = { id: Math.random(), variant, message };
+    createToast(toast);
 
     setVariant(VARIANT_OPTIONS[0]);
     setMessage('');
-  }
-
-  function createToast(toast) {
-    const nextToastStack = [...toastStack];
-    nextToastStack.push(toast);
-    setToastStack(nextToastStack);
-  }
-
-  function handleDismiss(index) {
-    const poppedToastStack = [...toastStack];
-    poppedToastStack.splice(index, 1);
-    setToastStack(poppedToastStack);
   }
 
   return (
@@ -40,7 +30,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toastStack={toastStack} handleDismiss={handleDismiss} />
+      <ToastShelf />
 
       <form
         className={styles.controlsWrapper}
