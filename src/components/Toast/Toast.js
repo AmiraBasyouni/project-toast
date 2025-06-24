@@ -18,20 +18,24 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ children, variant, setPopToast }) {
+function Toast({ children, variant, handleDismiss, index }) {
   let Icon = '';
   if (ICONS_BY_VARIANT[variant] === undefined) {
     throw new Error('Toast: ICONS_VARIANT does not contain variant');
   } else {
     Icon = ICONS_BY_VARIANT[variant];
   }
+
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
       <p className={styles.content}>{children}</p>
-      <button className={styles.closeButton} onClick={() => setPopToast(false)}>
+      <button
+        className={styles.closeButton}
+        onClick={() => handleDismiss(index)}
+      >
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
