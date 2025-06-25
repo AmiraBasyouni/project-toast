@@ -9,7 +9,6 @@ function ToastProvider({ children }) {
   function dismissToast(ToastId) {
     const nextToastStack = toastStack.filter((toast) => toast.id !== ToastId);
     setToastStack(nextToastStack);
-    console.log(nextToastStack);
   }
 
   // createToast function
@@ -21,8 +20,13 @@ function ToastProvider({ children }) {
     setToastStack(nextToastStack);
   }
 
+  // clearToasts function
+  function clearToasts() {
+    setToastStack([]);
+  }
+
   // Provider Values
-  const value = { createToast, dismissToast, toastStack };
+  const value = { createToast, dismissToast, clearToasts, toastStack };
 
   return (
     <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
