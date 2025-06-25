@@ -1,17 +1,17 @@
 import React from 'react';
 
-function useEscapeKey(action) {
+function useEscapeKey(handler) {
   React.useEffect(() => {
     function handleEscape(e) {
       if (e.key === 'Escape') {
-        action();
+        handler(e);
       }
     }
 
     window.addEventListener('keyup', handleEscape);
 
     return () => window.removeEventListener('keyup', handleEscape);
-  }, [action]);
+  }, [handler]);
 }
 
 export default useEscapeKey;
