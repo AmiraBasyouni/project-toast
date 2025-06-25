@@ -1,4 +1,5 @@
 import React from 'react';
+import useEscapeKey from '../../hooks/use-escape-key';
 
 export const ToastContext = React.createContext();
 
@@ -26,17 +27,7 @@ function ToastProvider({ children }) {
   }, []);
 
   // event: on escape, clear toastStack
-  React.useEffect(() => {
-    function handleEscape(e) {
-      if (e.key === 'Escape') {
-        clearToasts();
-      }
-    }
-
-    window.addEventListener('keyup', handleEscape);
-
-    return () => window.removeEventListener('keyup', handleEscape);
-  }, [clearToasts]);
+  useEscapeKey(clearToasts);
 
   // Provider Values
   const value = { createToast, dismissToast, clearToasts, toastStack };
