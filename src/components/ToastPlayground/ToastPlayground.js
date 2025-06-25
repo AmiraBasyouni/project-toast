@@ -12,19 +12,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const { createToast, clearToasts } = React.useContext(ToastContext);
-
-  React.useEffect(() => {
-    function handleEscape(e) {
-      if (e.key === 'Escape') {
-        clearToasts();
-      }
-    }
-
-    window.addEventListener('keyup', handleEscape);
-
-    return () => window.removeEventListener('keyup', handleEscape);
-  }, [clearToasts]);
+  const { createToast } = React.useContext(ToastContext);
 
   function handleFormSubmission(e) {
     e.preventDefault();
